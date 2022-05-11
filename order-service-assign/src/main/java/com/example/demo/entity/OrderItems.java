@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,7 @@ public class OrderItems {
 	private int price;
 	private String status;
 	private String orderStatus;
-	private Date lastUpdate;
-	private String channel;
+
 	
 	
 	
@@ -27,8 +25,7 @@ public class OrderItems {
 		super();
 	}
 
-	public OrderItems(int orderNo, int productId, int quantity, int price, String status, String orderStatus,
-			Date lastUpdate, String channel) {
+	public OrderItems(int orderNo, int productId, int quantity, int price, String status, String orderStatus) {
 		super();
 		this.orderNo = orderNo;
 		this.productId = productId;
@@ -36,8 +33,6 @@ public class OrderItems {
 		this.price = price;
 		this.status = status;
 		this.orderStatus = orderStatus;
-		this.lastUpdate = lastUpdate;
-		this.channel = channel;
 	}
 	
 	public int getOrderItemId() {
@@ -83,18 +78,6 @@ public class OrderItems {
 	}
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
-	}
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-	public String getChannel() {
-		return channel;
-	}
-	public void setChannel(String channel) {
-		this.channel = channel;
 	}
 	
 	
