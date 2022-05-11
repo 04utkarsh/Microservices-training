@@ -16,23 +16,18 @@ public class OrderItems {
 	private int quantity;
 	private int price;
 	private String status;
-	private String orderStatus;
-
-	
-	
 	
 	public OrderItems() {
 		super();
 	}
 
-	public OrderItems(int orderNo, int productId, int quantity, int price, String status, String orderStatus) {
+	public OrderItems(int orderNo, int productId, int quantity, int price, String status) {
 		super();
 		this.orderNo = orderNo;
 		this.productId = productId;
 		this.quantity = quantity;
 		this.price = price;
 		this.status = status;
-		this.orderStatus = orderStatus;
 	}
 	
 	public int getOrderItemId() {
@@ -72,12 +67,6 @@ public class OrderItems {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
 	}
 	
 	
