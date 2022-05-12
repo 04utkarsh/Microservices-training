@@ -2,36 +2,46 @@ package com.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Product {
 	
 	@Id
-	private int productId;
+	private int prodId;
 	private String productName;
 	private int rating;
 	private int price;
 	private boolean isActive;
 	
+	@OneToOne
+	@JoinColumn(name="productId")
+	private OrderItems orderItems;
+	
+//	  @OneToOne(fetch = FetchType.LAZY)
+//	    @JoinColumn(name = "user_id", nullable = false)
+//	    private User user;
+	
 	public Product() {
 		super();
 	}
 
-	public Product(int productId, String productName, int rating, int price, boolean isActive) {
+	public Product(int prodId, String productName, int rating, int price, boolean isActive) {
 		super();
-		this.productId = productId;
+		this.prodId = prodId;
 		this.productName = productName;
 		this.rating = rating;
 		this.price = price;
 		this.isActive = isActive;
 	}
 
-	public int getProductId() {
-		return productId;
+	public int getProdId() {
+		return prodId;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProdId(int prodId) {
+		this.prodId = prodId;
 	}
 
 	public String getProductName() {
@@ -64,6 +74,14 @@ public class Product {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public OrderItems getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(OrderItems orderItems) {
+		this.orderItems = orderItems;
 	}
 	
 	

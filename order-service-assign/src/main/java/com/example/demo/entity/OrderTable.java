@@ -1,21 +1,38 @@
 package com.example.demo.entity;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class OrderTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orderNo;
+	@NotNull(message="storeId cant be blank")
 	private int storeId; 
 	private String storeName;
 	private Date dated;
 	private Long orderAmount;
+	@NotNull(message="customerId cant be blank")
 	private int customerId;
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
+	
+	@OneToMany(cascade=CascadeType.REMOVE)
+	@JoinColumn(name="orderNo")
+	private List<OrderItems> orderItemsList;
 	
 	public OrderTable() {
 		super();
@@ -86,4 +103,17 @@ public class OrderTable {
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+
+	public List<OrderItems> getOrderItemsList() {
+		return orderItemsList;
+	}
+
+	public void setOrderItemsList(List<OrderItems> orderItemsList) {
+		this.orderItemsList = orderItemsList;
+	}
+	
+	public void addSingleOrderItems(OrderItems orderItems) {
+		this.orderItemsList.add(orderItems);
+	}
+	
 }

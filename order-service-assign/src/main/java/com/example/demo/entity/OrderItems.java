@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class OrderItems {
@@ -15,13 +20,19 @@ public class OrderItems {
 	private int productId;
 	private int quantity;
 	private int price;
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
+	
+	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy = "orderItems")
+	@JoinColumn(name="prodId")
+	private Product product;
 	
 	public OrderItems() {
 		super();
 	}
 
-	public OrderItems(int orderNo, int productId, int quantity, int price, String status) {
+	public OrderItems(int orderNo, int productId, int quantity, int price, OrderStatus status) {
 		super();
 		this.orderNo = orderNo;
 		this.productId = productId;
@@ -62,12 +73,21 @@ public class OrderItems {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 	
 	
 }
