@@ -119,7 +119,7 @@ public class OrderController {
 //	}
 	
 	@PostMapping("/orderitems")
-	public String saveOrderItems(@RequestBody OrderItems orderItems) {
+	public String saveOrderItems(@Valid @RequestBody OrderItems orderItems) {
 		Optional<OrderTable> orderTable=orderRepository.findById(orderItems.getOrderNo());
 		if(orderTable.isPresent()) {
 			OrderTable order=orderTable.get();

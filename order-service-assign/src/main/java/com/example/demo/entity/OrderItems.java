@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 
 @Entity
 public class OrderItems {
@@ -16,6 +17,7 @@ public class OrderItems {
 	@Id
 	@GeneratedValue
 	private int orderItemId;
+	@Min(value = 1,message = "Please enter a valid order number")
 	private int orderNo;
 	private int productId;
 	private int quantity;
