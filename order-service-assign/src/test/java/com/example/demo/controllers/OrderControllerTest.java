@@ -153,7 +153,7 @@ class OrderControllerTest {
 	void testUpdateOrder(){
 		when(orderRepository.findById(1)).thenReturn(Optional.of(listOrderTable.get(0)));
 		OrderItems orderItems=new OrderItems(1,10,100,1000,OrderStatus.CLOSED);
-		when(orderItemsRepository.findById(1)).thenReturn(Optional.of(orderItems));
+		when(orderItemsRepository.findByOrderNo(1)).thenReturn(List.of(orderItems));
 		
 		String orderTable=orderController.updateOrder(1);
 		

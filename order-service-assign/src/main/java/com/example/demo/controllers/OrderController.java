@@ -48,24 +48,37 @@ public class OrderController {
 	@GetMapping("/order/{orderNo}")
 	public OrderTable getOrder(@PathVariable int orderNo) {
 		Optional<OrderTable> order=orderRepository.findById(orderNo);
-		return (order.isPresent())?order.get():null;
+		if(order.isEmpty()) {
+			throw new NoResultFoundException("No data found with given orderID");
+		}
+		return order.get();
 	}
 	
 	@GetMapping("/order/byStoreId")
 	public List<OrderTable> getOrderByStoreId(@RequestParam int storeId) {
 		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByStoreId(storeId));
-		return (order.isPresent())?order.get():null;
+		if(order.isEmpty()) {
+			throw new NoResultFoundException("No data found with given storeID");
+		}
+		return order.get();
 	}
 	
 	@GetMapping("/order/byCustomerId")
 	public List<OrderTable> getOrderByCustomerId(@RequestParam int custId) {
 		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByCustomerId(custId));
-		return (order.isPresent())?order.get():null;
+		if(order.isEmpty()) {
+			throw new NoResultFoundException("No data found with given customerID");
+		}
+		return order.get();
 	}
 	
 	@GetMapping("/order/byStatus")
 	public List<OrderTable> getOrderByStatus(@RequestParam String status) {
-		return orderRepository.findByOrderStatus(status);
+		List<OrderTable> orders = orderRepository.findByOrderStatus(status);
+		if(orders.isEmpty()) {
+			throw new NoResultFoundException("No data found with given customerID");
+		}
+		return orders;
 	}
 	
 	@GetMapping("/order/sortBy")
@@ -100,11 +113,10 @@ public class OrderController {
 		if(orderTable.isPresent()) {
 			OrderTable order=orderTable.get();
 			order.setOrderStatus(OrderStatus.CANCELLED);
-			Optional<OrderItems> orderItems=orderItemsRepository.findById(order.getOrderNo());
-			if(orderItems.isPresent()) {
-				OrderItems orderItem=orderItems.get();
+			List<OrderItems> orderItems = orderItemsRepository.findByOrderNo(orderNo);
+			for(OrderItems orderItem : orderItems){
 				orderItem.setStatus(OrderStatus.CANCELLED);
-				orderItemsRepository.save(orderItem);	
+				orderItemsRepository.save(orderItem);
 			}
 			orderRepository.save(order);
 		}
