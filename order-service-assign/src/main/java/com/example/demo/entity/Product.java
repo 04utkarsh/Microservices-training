@@ -19,10 +19,6 @@ public class Product {
 	@JoinColumn(name="productId")
 	private OrderItems orderItems;
 	
-//	  @OneToOne(fetch = FetchType.LAZY)
-//	    @JoinColumn(name = "user_id", nullable = false)
-//	    private User user;
-	
 	public Product() {
 		super();
 	}

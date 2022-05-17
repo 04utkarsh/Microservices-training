@@ -58,15 +58,14 @@ public class OrderController {
 	}
 	
 	@GetMapping("/order/byStoreId")
-	public OrderTable getCustomerByStoreId(@RequestParam int custId) {
+	public OrderTable getOrderByCustomerId(@RequestParam int custId) {
 		Optional<OrderTable> order=Optional.ofNullable(orderRepository.findByCustomerId(custId));
 		return (order.isPresent())?order.get():null;
 	}
 	
 	@GetMapping("/order/byStatus")
 	public List<OrderTable> getOrderByStatus(@RequestParam String status) {
-		List<OrderTable> order=orderRepository.findByOrderStatus(status);
-		return order;
+		return orderRepository.findByOrderStatus(status);
 	}
 	
 	@GetMapping("/order/sortBy")
@@ -112,12 +111,6 @@ public class OrderController {
 		return "updated";
 	}
 	
-//	@DeleteMapping("/order/{orderNo}")
-//	public String deleteOrder(@PathVariable int orderNo) {
-//		orderRepository.deleteById(orderNo);
-//		return "deleted";
-//	}
-	
 	@PostMapping("/orderitems")
 	public String saveOrderItems(@Valid @RequestBody OrderItems orderItems) {
 		Optional<OrderTable> orderTable=orderRepository.findById(orderItems.getOrderNo());
@@ -126,7 +119,6 @@ public class OrderController {
 			order.addSingleOrderItems(orderItems);
 			orderRepository.save(order);
 		}
-		//orderItemsRepository.save(orderItems);
 		return "saved";
 	}
 	

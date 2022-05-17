@@ -16,7 +16,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(NoResultFoundException.class)
 	public final ResponseEntity<Object> handleAllExceptions(NoResultFoundException ex){
 		ExceptionResponse response = new ExceptionResponse(404,ex.getMessage());
-		return new ResponseEntity(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 	
 

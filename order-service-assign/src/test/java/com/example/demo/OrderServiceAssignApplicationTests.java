@@ -8,12 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class OrderServiceAssignApplicationTests {
 
-	@Test
-	void contextLoads() {
-		
-		System.out.println("this is test file");
-		int a=1,b=1;
-		assertEquals(2,a+b);
-	}
+	   @Test
+	   public void main() {
+		   OrderServiceAssignApplication.main(new String[] {});
+	   }
 
 }

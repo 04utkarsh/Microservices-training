@@ -16,7 +16,7 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	@GetMapping("/product/{orderNo}")
+	@GetMapping("/product/{prodId}")
 	public Product getProductById(@PathVariable int prodId) {
 		Optional<Product> product=productRepository.findById(prodId);
 		return (product.isPresent())?product.get():null;
