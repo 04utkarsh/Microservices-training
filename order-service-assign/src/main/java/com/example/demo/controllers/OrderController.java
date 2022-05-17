@@ -36,7 +36,7 @@ public class OrderController {
 	@Autowired
 	private OrderItemsRepository orderItemsRepository;
 	
-	@GetMapping("/orders")
+	@GetMapping("/orders/all")
 	public List<OrderTable> getAllOrder() {
 		List<OrderTable> orderList=orderRepository.findAll();
 		if(orderList.isEmpty()) {
@@ -51,13 +51,13 @@ public class OrderController {
 		return (order.isPresent())?order.get():null;
 	}
 	
-	@GetMapping("/order")
+	@GetMapping("/order/byStoreId")
 	public List<OrderTable> getOrderByStoreId(@RequestParam int storeId) {
 		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByStoreId(storeId));
 		return (order.isPresent())?order.get():null;
 	}
 	
-	@GetMapping("/order/byStoreId")
+	@GetMapping("/order/byCustomerId")
 	public List<OrderTable> getOrderByCustomerId(@RequestParam int custId) {
 		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByCustomerId(custId));
 		return (order.isPresent())?order.get():null;
