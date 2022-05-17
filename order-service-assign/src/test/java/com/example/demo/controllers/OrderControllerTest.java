@@ -79,22 +79,20 @@ class OrderControllerTest {
 	
 	@Test
 	void testGetOrderByStoreId(){
-		when(orderRepository.findByStoreId(1)).thenReturn(listOrderTable.get(0));
+		when(orderRepository.findByStoreId(1)).thenReturn(listOrderTable);
 		
-		OrderTable orderTable=orderController.getOrderByStoreId(1);
+		List<OrderTable> orderTable=orderController.getOrderByStoreId(1);
 		
-		assertEquals(1,orderTable.getOrderNo());
-		assertEquals(1,orderTable.getStoreId());
+		assertEquals(3,orderTable.size());
 	}
 	
 	@Test
 	void testGetOrderByCustomerId(){
-		when(orderRepository.findByCustomerId(10)).thenReturn(listOrderTable.get(0));
+		when(orderRepository.findByCustomerId(10)).thenReturn(listOrderTable);
 		
-		OrderTable orderTable=orderController.getOrderByCustomerId(10);
+		List<OrderTable> orderTable=orderController.getOrderByCustomerId(10);
 		
-		assertEquals(1,orderTable.getOrderNo());
-		assertEquals(1,orderTable.getStoreId());
+		assertEquals(3,orderTable.size());
 	}
 	
 	@Test

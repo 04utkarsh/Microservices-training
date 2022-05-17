@@ -11,8 +11,8 @@ import com.example.demo.entity.OrderTable;
 public interface OrderRepository extends JpaRepository<OrderTable,Integer>{
 
 	public List<OrderTable> findByOrderStatus(String orderStatus);
-	public OrderTable findByStoreId(int storeId);
-	public OrderTable findByCustomerId(int custId);
+	public List<OrderTable> findByStoreId(int storeId);
+	public List<OrderTable> findByCustomerId(int custId);
 	public List<OrderTable> findAllByOrderByOrderStatusAsc();
 	public List<OrderTable> findAllByOrderByDatedAsc();
 }

@@ -52,14 +52,14 @@ public class OrderController {
 	}
 	
 	@GetMapping("/order")
-	public OrderTable getOrderByStoreId(@RequestParam int storeId) {
-		Optional<OrderTable> order=Optional.ofNullable(orderRepository.findByStoreId(storeId));
+	public List<OrderTable> getOrderByStoreId(@RequestParam int storeId) {
+		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByStoreId(storeId));
 		return (order.isPresent())?order.get():null;
 	}
 	
 	@GetMapping("/order/byStoreId")
-	public OrderTable getOrderByCustomerId(@RequestParam int custId) {
-		Optional<OrderTable> order=Optional.ofNullable(orderRepository.findByCustomerId(custId));
+	public List<OrderTable> getOrderByCustomerId(@RequestParam int custId) {
+		Optional<List<OrderTable>> order=Optional.ofNullable(orderRepository.findByCustomerId(custId));
 		return (order.isPresent())?order.get():null;
 	}
 	
